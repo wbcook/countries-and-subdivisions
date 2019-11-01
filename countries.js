@@ -262,18 +262,17 @@ const fs = require('fs');
 const mapArrays = (keysArray, valuesArray) =>  {
 	let reformattedArray = keysArray.map((item, index) =>{ 
 		const object = {};
-		object[item] = valuesArray[index];
+		object.country = item;
+		object.subdivisions = valuesArray[index];
 		return object;
 	});
 	return reformattedArray;
 }
 
 const mappedArrays = mapArrays(countries, subdivisions);
-const subdivisionList = {}
+const output = { data: mappedArrays };
 
-subdivisionList.subdivisionList = mappedArrays;
-
-fs.writeFile('subdivisionList.json', JSON.stringify(subdivisionList), (err) => {
+fs.writeFile('countriesAndSubdivisions.json', JSON.stringify(output), (err) => {
 	if (err) throw err;
 	console.log('The file has been saved!');
 });
