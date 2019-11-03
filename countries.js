@@ -260,9 +260,9 @@ subdivisions[252]="Bulawayo|Harare|ManicalandMashonaland Central|Mashonaland Eas
 const fs = require('fs');
 
 const mapArrays = (keysArray, valuesArray) =>  {
-	let reformattedArray = keysArray.map((item, index) =>{ 
+	let reformattedArray = keysArray.map((item, index) =>{
 		const object = {};
-		object.country = item;
+		object.name = item;
 		object.subdivisions = valuesArray[index];
 		return object;
 	});
@@ -270,9 +270,13 @@ const mapArrays = (keysArray, valuesArray) =>  {
 }
 
 const mappedArrays = mapArrays(countries, subdivisions);
-const output = { data: mappedArrays };
+// const output = { data: mappedArrays };
 
-fs.writeFile('countriesAndSubdivisions.json', JSON.stringify(output), (err) => {
-	if (err) throw err;
-	console.log('The file has been saved!');
-});
+const filteredArray = mappedArrays.filter( country => country.name === "United States");
+
+console.log(filteredArray);
+
+// fs.writeFile('countriesAndSubdivisions.json', JSON.stringify(output), (err) => {
+// 	if (err) throw err;
+// 	console.log('The file has been saved!');
+// });
